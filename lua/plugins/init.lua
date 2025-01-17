@@ -1,18 +1,15 @@
 return {
   {
     "stevearc/conform.nvim",
-    event = "BufWritePre", -- uncomment for format on save
+    event = "BufWritePre",
     opts = require "configs.conform",
   },
-
-  -- These are some examples, uncomment them if you want to see them work!
   {
     "neovim/nvim-lspconfig",
     config = function()
       require "configs.lspconfig"
     end,
   },
-
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
@@ -30,30 +27,51 @@ return {
     },
   },
   {
-    "zk-org/zk-nvim",
-    cmd = {
-      "ZkIndex",
-      "ZkNew",
-      "ZkNewFromTitleSelection",
-      "ZkNewFromContentSelection",
-      "ZkCd",
-      "ZkNotes",
-      "ZkBuffers",
-      "ZkBacklinks",
-      "ZkLinks",
-      "ZkInsertLink",
-      "ZkInsertLinkAtSelection",
-      "ZkMatch",
-      "ZkTags",
-    },
-    config = function()
-      require("zk").setup {
-        picker = "telescope",
-      }
-    end,
-  },
-  {
     "HiPhish/rainbow-delimiters.nvim",
     event = "BufEnter",
+  },
+  {
+    "nvim-neorg/neorg",
+    version = "^7",
+    build = ":Neorg sync-parsers",
+    event = "VeryLazy",
+    dependecies = {
+      {
+        "nvim-lua/plenary.nvim",
+      },
+      { "nvim-treesitter/nvim-treesitter",
+        opts = {
+          auto_install = true,
+          highlight = {
+            enable = true,
+            additional_vim_regex_highlighting = false,
+          },
+        },
+        config = function(_, opts)
+          require('nvim-treesitter.configs').setup(opts)
+        end
+      },
+    },
+    opts = {
+      load = {
+        ["core.defaults"] = {}, -- Loads default behavior
+        ["core.concealer"] = {}, -- Adds pretty icons to your documents
+        ["core.keybinds"] = {}, -- Adds defaults keybindings
+        ["core.completion"] = {
+          config = {
+            engine = "nvim-cmp",
+          },
+        }, -- Enables support for completion plugins
+        ["core.journal"] = {}, -- Enables support for completion plugins
+        ["core.dirman"] = {
+          config = {
+            workspaces = {
+              notes = "~/documents/repos/notes",
+            },
+            default_workspace = "notes",
+          },
+        },
+      },
+    },
   },
 }
