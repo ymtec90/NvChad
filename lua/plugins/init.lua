@@ -74,4 +74,22 @@ return {
       },
     },
   },
+  {
+    "arakkkkk/kanban.nvim",
+    cmd = {
+      "KanbanCreate",
+      "KanbanOpen",
+    },
+    dependencies = {
+      "nvim-telescope/telescope.nvim"
+    },
+    config = function()
+      require("kanban").setup({
+        markdown = {
+          description_folder = "~/documents/repos/notes/tasks/",
+          list_head = "## ",
+        },
+      })
+    end,
+  },
 }
