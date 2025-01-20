@@ -93,7 +93,7 @@ return {
     config = function()
       require("kanban").setup {
         markdown = {
-          description_folder = "~/documents/repos/notes/tasks/",
+          description_folder = "./detail/",
           list_head = "## ",
         },
       }
