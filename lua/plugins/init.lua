@@ -31,6 +31,12 @@ return {
     event = "BufEnter",
   },
   {
+    "folke/todo-comments.nvim",
+    event = "BufEnter",
+    dependecies = { "nvim-lua/plenary.nvim" },
+    opts = {},
+  },
+  {
     "nvim-neorg/neorg",
     version = "^7",
     build = ":Neorg sync-parsers",
@@ -39,7 +45,8 @@ return {
       {
         "nvim-lua/plenary.nvim",
       },
-      { "nvim-treesitter/nvim-treesitter",
+      {
+        "nvim-treesitter/nvim-treesitter",
         opts = {
           auto_install = true,
           highlight = {
@@ -48,8 +55,8 @@ return {
           },
         },
         config = function(_, opts)
-          require('nvim-treesitter.configs').setup(opts)
-        end
+          require("nvim-treesitter.configs").setup(opts)
+        end,
       },
     },
     opts = {
@@ -81,15 +88,15 @@ return {
       "KanbanOpen",
     },
     dependencies = {
-      "nvim-telescope/telescope.nvim"
+      "nvim-telescope/telescope.nvim",
     },
     config = function()
-      require("kanban").setup({
+      require("kanban").setup {
         markdown = {
           description_folder = "~/documents/repos/notes/tasks/",
           list_head = "## ",
         },
-      })
+      }
     end,
   },
 }
