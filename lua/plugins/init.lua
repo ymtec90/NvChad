@@ -39,7 +39,7 @@ return {
   {
     "nvim-neorg/neorg",
     version = "^7",
-    build = ":Neorg sync-parsers",
+    -- build = ":Neorg sync-parsers",
     event = "VeryLazy",
     dependecies = {
       {
@@ -62,14 +62,27 @@ return {
     opts = {
       load = {
         ["core.defaults"] = {}, -- Loads default behavior
-        ["core.concealer"] = {}, -- Adds pretty icons to your documents
-        ["core.keybinds"] = {}, -- Adds defaults keybindings
+        ["core.concealer"] = {
+          config = {
+            { icon_preset = "diamond" }
+          },
+        }, -- Adds pretty icons to your documents
+        ["core.keybinds"] = {
+          -- https://github.com/nvim-neorg/neorg/blob/main/lua/neorg/modules/core/keybinds/keybinds
+          config = {
+            default_keybindings = true,
+            neorg_leader = "<Leader><Leader>",
+          },
+        }, -- Adds defaults keybindings
         ["core.completion"] = {
           config = {
             engine = "nvim-cmp",
+            name = "[Norg]"
           },
         }, -- Enables support for completion plugins
-        ["core.journal"] = {}, -- Enables support for completion plugins
+        ["core.ui"] = {},
+        ["core.ui.calendar"] = {},
+        ["core.journal"] = {},-- Enables journal module
         ["core.dirman"] = {
           config = {
             workspaces = {
@@ -82,21 +95,38 @@ return {
     },
   },
   {
-    "arakkkkk/kanban.nvim",
-    cmd = {
-      "KanbanCreate",
-      "KanbanOpen",
-    },
-    dependencies = {
-      "nvim-telescope/telescope.nvim",
-    },
-    config = function()
-      require("kanban").setup {
-        markdown = {
-          description_folder = "./detail/",
-          list_head = "## ",
+    "hrsh7th/cmp-cmdline",
+    keys = { ":", "/", "?" },
+    dependencies = { "hrsh7th/nvim-cmp" },
+    opts = function()
+      local cmp = require "cmp"
+      return {
+        {
+          type = "/",
+          mapping = cmp.mapping.preset.cmdline(),
+          sources = {
+            { name = "buffer" },
+          },
+        },
+        {
+          type = ":",
+          mapping = cmp.mapping.preset.cmdline(),
+          sources = cmp.config.sources({
+            { name = "path" },
+          }, {
+              {
+                name = "cmdline",
+                option = {
+                  ignore_cmds = { "Man", "!" },
+                },
+              },
+            }),
         },
       }
+    end,
+    config = function(_, opts)
+      local cmp = require "cmp"
+      vim.tbl_map(function(val) cmp.setup.cmdline(val.type, val) end, opts)
     end,
   },
 }
