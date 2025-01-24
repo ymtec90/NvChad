@@ -64,7 +64,7 @@ return {
         ["core.defaults"] = {}, -- Loads default behavior
         ["core.concealer"] = {
           config = {
-            { icon_preset = "diamond" }
+            { icon_preset = "diamond" },
           },
         }, -- Adds pretty icons to your documents
         ["core.keybinds"] = {
@@ -77,12 +77,12 @@ return {
         ["core.completion"] = {
           config = {
             engine = "nvim-cmp",
-            name = "[Norg]"
+            name = "[Norg]",
           },
         }, -- Enables support for completion plugins
         ["core.ui"] = {},
         ["core.ui.calendar"] = {},
-        ["core.journal"] = {},-- Enables journal module
+        ["core.journal"] = {}, -- Enables journal module
         ["core.dirman"] = {
           config = {
             workspaces = {
@@ -114,19 +114,21 @@ return {
           sources = cmp.config.sources({
             { name = "path" },
           }, {
-              {
-                name = "cmdline",
-                option = {
-                  ignore_cmds = { "Man", "!" },
-                },
+            {
+              name = "cmdline",
+              option = {
+                ignore_cmds = { "Man", "!" },
               },
-            }),
+            },
+          }),
         },
       }
     end,
     config = function(_, opts)
       local cmp = require "cmp"
-      vim.tbl_map(function(val) cmp.setup.cmdline(val.type, val) end, opts)
+      vim.tbl_map(function(val)
+        cmp.setup.cmdline(val.type, val)
+      end, opts)
     end,
   },
 }
