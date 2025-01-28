@@ -294,4 +294,89 @@ return {
       }
     end,
   },
+  {
+    "Zeioth/compiler.nvim",
+    dependencies = {
+      {
+        "stevearc/overseer.nvim",
+        config = function(_, opts)
+          require("overseer").setup(opts)
+        end,
+      },
+      {
+        "nvim-telescope/telescope.nvim",
+      },
+    },
+    cmd = {
+      "CompilerOpen",
+      "CompilerToggleResults",
+      "CompilerRedo",
+    },
+    opts = {},
+    keys = {
+      { "<leader>co", "<cmd>CompilerOpen<CR>", desc = "Open Compiler" },
+      { "<leader>cr", "<cmd>CompilerStop<CR>" .. "<cmd>CompilerRedo<CR>", desc = "Redo Last Selection Option" },
+      { "<leader>ct", "<cmd>CompilerToggleResults<CR>", desc = "Toggle Compiler Results" },
+    },
+  },
+  {
+    "stevearc/overseer.nvim",
+    cmd = {
+      "OverseerOpen",
+      "OverseerClose",
+      "OverseerToggle",
+      "OverseerSaveBundle",
+      "OverseerLoadBundle",
+      "OverseerDeleteBundle",
+      "OverseerRunCmd",
+      "OverseerRun",
+      "OverseerInfo",
+      "OverseerBuild",
+      "OverseerQuickAction",
+      "OverseerTaskAction ",
+      "OverseerClearCache",
+    },
+    opts = {
+      dap = false,
+      task_list = { -- this refers to the window that shows the result
+        direction = "bottom",
+        min_height = 25,
+        max_height = 25,
+        default_detail = 1,
+        bindings = {
+          ["q"] = function()
+            vim.cmd "OverseerClose"
+          end,
+          ["<C-h>"] = false,
+          ["<C-j>"] = false,
+          ["<C-k>"] = false,
+          ["<C-l>"] = false,
+        },
+        form = {
+          win_opts = {
+            winblend = 0,
+          },
+        },
+        confirm = {
+          win_opts = {
+            winblend = 0,
+          },
+        },
+        task_win = {
+          win_opts = {
+            winblend = 0,
+          },
+        },
+      },
+    },
+    keys = {
+      { "<leader>ow", "<cmd>OverseerToggle<CR>", desc = "Task list" },
+      { "<leader>oo", "<cmd>OverseerRun<CR>", desc = "Run task" },
+      { "<leader>oq", "<cmd>OverseerQuickAction<CR>", desc = "Action recent task" },
+      { "<leader>oi", "<cmd>OverseerInfo<CR>", desc = "Overseer Info" },
+      { "<leader>ob", "<cmd>OverseerBuild<CR>", desc = "Task builder" },
+      { "<leader>ot", "<cmd>OverseerTaskAction<CR>", desc = "Task action" },
+      { "<leader>oc", "<cmd>OverseerClearCache<CR>", desc = "Clear cache" },
+    },
+  },
 }
