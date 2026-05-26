@@ -30,6 +30,9 @@ return {
         "typescript",
         "tsx",
         "htmldjango",
+        "yaml",
+        "markdown",
+        "markdown_inline",
       },
     },
   },
@@ -389,6 +392,101 @@ return {
         default_remote = { "upstream", "origin" },
         suppress_missing_scope = {
           projects_v2 = true,
+        },
+      }
+    end,
+  },
+
+  {
+    "olimorris/codecompanion.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-telescope/telescope.nvim",
+    },
+    cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions" },
+    keys = {
+      { "<leader>ca", "<cmd>CodeCompanionActions<cr>", mode = { "n", "v" }, desc = "IA Ações" },
+      { "<leader>cc", "<cmd>CodeCompanionChat Toggle<cr>", mode = { "n", "v" }, desc = "IA Chat" },
+      { "<leader>cg", "<cmd>CodeCompanion /commit_padrao<cr>", mode = "n", desc = "IA Gerar Commit" },
+    },
+    config = function()
+      require("codecompanion").setup {
+        strategies = {
+          chat = { adapter = "ollama" },
+          inline = { adapter = "ollama" },
+          agent = { adapter = "ollama" },
+        },
+        adapters = {
+          ollama = function()
+            return require("codecompanion.adapters").extend("ollama", {
+              name = "ollama",
+              env = {
+                url = "http://localhost:11434",
+              },
+              headers = {
+                ["Content-Type"] = "application/json",
+              },
+              parameters = {
+                sync = true,
+              },
+              schema = {
+                model = {
+                  default = "qwen2.5-coder:1.5b",
+                },
+                num_ctx = {
+                  default = 8192,
+                },
+              },
+            })
+          end,
+        },
+
+        system_prompt = function()
+          return [[Você é um engenheiro de software e cientista de dados auxiliando uma equipe técnica, com foco em desenvolvimento, análise de dados e sistemas de suprimento de bens e serviços.
+          Suas respostas devem ser diretas, altamente técnicas e estritamente em português do Brasil.
+          Sempre priorize eficiência computacional, boas práticas em Python/Bash e legibilidade no código.]]
+        end,
+
+        -- AQUI ESTÁ A CORREÇÃO PRINCIPAL: A chave correta é prompt_library
+        prompt_library = {
+          ["commit_padrao"] = {
+            interaction = "chat",
+            description = "Gera uma mensagem de commit seguindo o padrão rígido da equipe",
+            opts = {
+              alias = "commit_padrao",
+              is_slash_cmd = true,
+              auto_submit = true,
+            },
+            prompts = {
+              {
+                role = "system",
+                content = [[Você é um gerador de mensagens de commit de código.
+                Você deve analisar o git diff fornecido e gerar uma mensagem de commit ESTRITAMENTE neste formato:
+
+                <TIPO>(<ESCOPO>): <Descrição curta no imperativo em português>
+
+                Tipos permitidos pela equipe:
+                - feat (nova funcionalidade, modelo ou integração)
+                - fix (correção de bug em script ou pipeline)
+                - docs (atualização de documentação)
+                - refactor (otimização de código estrutural)
+                - chore (atualizações de pacotes, configurações no Neovim/Linux)
+
+                Exemplo de saída esperada:
+                feat(analytics): adiciona cálculo de probabilidade histórica no painel principal
+
+                Regra de Ouro: Retorne APENAS a mensagem de commit final. Não adicione saudações, não explique o diff e não use blocos de código markdown. Apenas o texto plano.]],
+              },
+              {
+                role = "user",
+                content = function()
+                  -- Usa o comando nativo do sistema para pegar o diff exato do que está em "stage"
+                  return "Gere a mensagem de commit para o seguinte diff:\n\n" .. vim.fn.system "git diff --staged"
+                end,
+              },
+            },
+          },
         },
       }
     end,
