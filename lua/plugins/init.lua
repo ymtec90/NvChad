@@ -330,4 +330,67 @@ return {
       }
     end,
   },
+
+  {
+    "sindrets/diffview.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    cmd = {
+      "DiffviewOpen",
+      "DiffviewClose",
+      "DiffviewToggleFiles",
+      "DiffviewFocusFiles",
+      "DiffviewFileHistory",
+    },
+    config = function()
+      require("diffview").setup {
+        view = {
+          merge_tool = {
+            layout = "diff3_mixed",
+          },
+        },
+      }
+    end,
+  },
+
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+    cmd = "Neogit",
+    config = function()
+      require("neogit").setup {
+        -- Integrações ativas com os outros plugins do seu ambiente
+        integrations = {
+          diffview = true,
+          telescope = true,
+        },
+        kind = "tab",
+        commit_editor = {
+          kind = "split",
+        },
+      }
+    end,
+  },
+
+  {
+    "pwntester/octo.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
+    cmd = { "Octo" },
+    config = function()
+      require("octo").setup {
+        enable_builtin = true,
+        default_remote = { "upstream", "origin" },
+        suppress_missing_scope = {
+          projects_v2 = true,
+        },
+      }
+    end,
+  },
 }
