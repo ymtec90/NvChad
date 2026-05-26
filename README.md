@@ -6,7 +6,7 @@ Esta é uma configuração personalizada e turbinada baseada no NvChad v2.5. O a
 
 * **Python (Backend & Data)**: Suporte robusto com o servidor de linguagem `pyright`, formatação via `ruff` e debugging avançado integrado com o `nvim-dap-python`.
 
-* **Inteligência Artificial (Ollama)**: Integração nativa para rodar LLMs locais (configurado para usar o modelo `qwen2.5-coder:1.5b`). O workflow inclui o `ChatOllama.nvim` para prompts interativos e o `pm-agent.nvim` para revisão e assistência autônoma.
+* **Inteligência Artificial Avançada (Ollama + Codecompanion)**: Integração profunda com LLMs locais, focada no modelo `qwen2.5-coder:1.5b`. Utiliza o `codecompanion.nvim` com um prompt de sistema especializado para auxiliar em engenharia de software. Conta também com um gerador autônomo de mensagens de commit baseado nas alterações em stage (git diff) e mantem suporte ao `ChatOllama.nvim` e `pm-agent.nvim`.
 
 * **Desenvolvimento Web**: Ambiente pronto para HTML, CSS, JavaScript, TypeScript, React e templates Django, com formatação via `prettier` e `djlint`. Conta com debug JS/Node via `nvim-dap-vscode-js` e servidor de preview ao vivo com o `live-preview.nvim`.
 
@@ -16,6 +16,13 @@ Esta é uma configuração personalizada e turbinada baseada no NvChad v2.5. O a
 
 ## ⌨️ Principais Keybindings (Atalhos)
 A tecla líder (`<leader>`) está configurada como `Espaço`.
+
+## 🤖 Inteligência Artificial (CodeCompanion)
+* `<leader>cc` : Abrir / Alternar o painel de Chat da IA
+
+* `<leader>ca` : Abrir o menu de Ações Rápidas da IA
+
+* `<leader>cg` : Gerar mensagem de commit baseada no `git diff` seguindo o padrão da equipe
 
 ## 🌳 Git & GitHub
 * `<leader>gs` : Abrir painel de Status do Neogit
