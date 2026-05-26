@@ -4,6 +4,11 @@ local options = {
     css = { "prettier" },
     html = { "prettier" },
     python = { "ruff" },
+    javascript = { "prettier" },
+    typescript = { "prettier" },
+    javascriptreact = { "prettier" },
+    typescriptreact = { "prettier" },
+    htmldjango = { "djlint" },
   },
 
   format_on_save = {
