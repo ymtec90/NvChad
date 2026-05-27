@@ -444,8 +444,8 @@ return {
 
         system_prompt = function()
           return [[Você é um engenheiro de software e cientista de dados auxiliando uma equipe técnica, com foco em desenvolvimento, análise de dados e sistemas de suprimento de bens e serviços.
-          Suas respostas devem ser diretas, altamente técnicas e estritamente em português do Brasil.
-          Sempre priorize eficiência computacional, boas práticas em Python/Bash e legibilidade no código.]]
+            Suas respostas devem ser diretas, altamente técnicas e estritamente em português do Brasil.
+            Sempre priorize eficiência computacional, boas práticas em Python/Bash e legibilidade no código.]]
         end,
 
         -- AQUI ESTÁ A CORREÇÃO PRINCIPAL: A chave correta é prompt_library
@@ -462,21 +462,21 @@ return {
               {
                 role = "system",
                 content = [[Você é um gerador de mensagens de commit de código.
-                Você deve analisar o git diff fornecido e gerar uma mensagem de commit ESTRITAMENTE neste formato:
+                  Você deve analisar o git diff fornecido e gerar uma mensagem de commit ESTRITAMENTE neste formato:
 
-                <TIPO>(<ESCOPO>): <Descrição curta no imperativo em português>
+                  <TIPO>(<ESCOPO>): <Descrição curta no imperativo em português>
 
-                Tipos permitidos pela equipe:
-                - feat (nova funcionalidade, modelo ou integração)
-                - fix (correção de bug em script ou pipeline)
-                - docs (atualização de documentação)
-                - refactor (otimização de código estrutural)
-                - chore (atualizações de pacotes, configurações no Neovim/Linux)
+                  Tipos permitidos pela equipe:
+                  - feat (nova funcionalidade, modelo ou integração)
+                  - fix (correção de bug em script ou pipeline)
+                  - docs (atualização de documentação)
+                  - refactor (otimização de código estrutural)
+                  - chore (atualizações de pacotes, configurações no Neovim/Linux)
 
-                Exemplo de saída esperada:
-                feat(analytics): adiciona cálculo de probabilidade histórica no painel principal
+                  Exemplo de saída esperada:
+                  feat(analytics): adiciona cálculo de probabilidade histórica no painel principal
 
-                Regra de Ouro: Retorne APENAS a mensagem de commit final. Não adicione saudações, não explique o diff e não use blocos de código markdown. Apenas o texto plano.]],
+                  Regra de Ouro: Retorne APENAS a mensagem de commit final. Não adicione saudações, não explique o diff e não use blocos de código markdown. Apenas o texto plano.]],
               },
               {
                 role = "user",
@@ -490,5 +490,31 @@ return {
         },
       }
     end,
+  },
+
+  {
+    "Zeioth/compiler.nvim",
+    cmd = { "CompilerOpen", "CompilerToggleResults", "CompilerRedo" },
+    dependencies = { "stevearc/overseer.nvim", "nvim-telescope/telescope.nvim" },
+    opts = {},
+    keys = {
+      { "<leader>co", "<cmd>CompilerOpen<cr>", desc = "Abrir Compilador" },
+      { "<leader>cr", "<cmd>CompilerStop<cr><cmd>CompilerRedo<cr>", desc = "Refazer Compilação" },
+      { "<leader>ct", "<cmd>CompilerToggleResults<cr>", desc = "Resultados da Compilação" },
+    },
+  },
+
+  {
+    "stevearc/overseer.nvim",
+    commit = "6271cab7ccc4ca840faa93f54440ffae3a3918bd",
+    cmd = { "CompilerOpen", "CompilerToggleResults", "CompilerRedo" },
+    opts = {
+      task_list = {
+        direction = "bottom",
+        min_height = 25,
+        max_height = 25,
+        default_detail = 1,
+      },
+    },
   },
 }
