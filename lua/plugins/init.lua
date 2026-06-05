@@ -224,34 +224,6 @@ return {
   },
 
   {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      -- NvChad já possui um bom sistema de notificações nativo, mas o Noice
-      -- permite integração avançada se quiser adicionar o nvim-notify no futuro.
-    },
-    opts = {
-      lsp = {
-        -- Sobrescreve o renderizador de markdown do LSP nativo para usar o Noice
-        override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true,
-        },
-      },
-      -- Predefinições visuais que combinam bem com o NvChad
-      presets = {
-        bottom_search = true, -- Usa a linha de comando inferior clássica para buscas
-        command_palette = true, -- Posiciona o cmdline no centro (estilo paleta de comandos)
-        long_message_to_split = true, -- Envia mensagens longas para um split
-        inc_rename = false,
-        lsp_doc_border = false,
-      },
-    },
-  },
-
-  {
     "hrsh7th/cmp-cmdline",
     event = "CmdlineEnter",
     dependencies = { "hrsh7th/nvim-cmp" },
@@ -490,31 +462,5 @@ return {
         },
       }
     end,
-  },
-
-  {
-    "Zeioth/compiler.nvim",
-    cmd = { "CompilerOpen", "CompilerToggleResults", "CompilerRedo" },
-    dependencies = { "stevearc/overseer.nvim", "nvim-telescope/telescope.nvim" },
-    opts = {},
-    keys = {
-      { "<leader>co", "<cmd>CompilerOpen<cr>", desc = "Abrir Compilador" },
-      { "<leader>cr", "<cmd>CompilerStop<cr><cmd>CompilerRedo<cr>", desc = "Refazer Compilação" },
-      { "<leader>ct", "<cmd>CompilerToggleResults<cr>", desc = "Resultados da Compilação" },
-    },
-  },
-
-  {
-    "stevearc/overseer.nvim",
-    commit = "6271cab7ccc4ca840faa93f54440ffae3a3918bd",
-    cmd = { "CompilerOpen", "CompilerToggleResults", "CompilerRedo" },
-    opts = {
-      task_list = {
-        direction = "bottom",
-        min_height = 25,
-        max_height = 25,
-        default_detail = 1,
-      },
-    },
   },
 }

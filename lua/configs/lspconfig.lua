@@ -21,7 +21,7 @@ vim.lsp.config.lua_ls = {
 local servers = {
   "html",
   "cssls",
-  "pyright",
+  "basedpyright",
   "ts_ls",
   "emmet_ls",
   "lua_ls",
