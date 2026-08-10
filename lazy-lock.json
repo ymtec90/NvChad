@@ -38,6 +38,7 @@
   "octo.nvim": { "branch": "master", "commit": "7fed87415c401954f73401bbed0fd736b9611e7c" },
   "plenary.nvim": { "branch": "master", "commit": "74b06c6c75e4eeb3108ec01852001636d85a932b" },
   "pm-agent.nvim": { "branch": "main", "commit": "c69f509a5fb3fbdb1112a19d3f7ba879d170c086" },
+  "r.nvim": { "branch": "main", "commit": "7bd12b51e5c480d3fea73a7d628315720f301071" },
   "rainbow-delimiters.nvim": { "branch": "master", "commit": "a798325b7f36acc62741d1029930a7b96d4dd4bf" },
   "telescope.nvim": { "branch": "master", "commit": "7d324792b7943e4aa16ad007212e6acc6f9fe335" },
   "trouble.nvim": { "branch": "main", "commit": "bd67efe408d4816e25e8491cc5ad4088e708a69a" },

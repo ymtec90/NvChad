@@ -24,3 +24,11 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave"
     end
   end,
 })
+
+-- Suporte para o R
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "r", "rmd" },
+  callback = function()
+    vim.lsp.start(vim.lsp.config.r_languageserver)
+  end,
+})

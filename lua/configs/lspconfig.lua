@@ -17,6 +17,13 @@ vim.lsp.config.lua_ls = {
   },
 }
 
+-- Adicionando suporte ao R
+vim.lsp.config.r_languageserver = {
+  settings = {
+    filetypes = { "r", "rmd" },
+  },
+}
+
 -- Lista de servidores que você quer ativar
 local servers = {
   "html",

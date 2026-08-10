@@ -33,6 +33,9 @@ return {
         "yaml",
         "markdown",
         "markdown_inline",
+        "r",
+        "csv",
+        "latex",
       },
     },
   },
@@ -460,6 +463,36 @@ return {
             },
           },
         },
+      }
+    end,
+  },
+
+  {
+    "R-nvim/r.nvim",
+    ft = { "r", "rmd", "quarto", "rhelp", "rnoweb" },
+    config = function()
+      -- Configurações opcionais iniciais do r.nvim
+      require("r").setup {
+        -- Exemplo de opções úteis para o workflow
+        hook = {
+          on_filetype = function()
+            -- Mapeamentos locais de buffer úteis para Cientistas de Dados
+            vim.keymap.set("n", "<LocalLeader>ee", "<cmd>RRunLine<CR>", { buffer = true, desc = "Executar linha R" })
+            vim.keymap.set(
+              "v",
+              "<LocalLeader>ee",
+              "<cmd>RRunSelection<CR>",
+              { buffer = true, desc = "Executar seleção R" }
+            )
+            vim.keymap.set(
+              "n",
+              "<LocalLeader>ca",
+              "<cmd>RCategory<CR>",
+              { buffer = true, desc = "Ver objetos no ambiente" }
+            )
+          end,
+        },
+        auto_start = "on startup",
       }
     end,
   },
