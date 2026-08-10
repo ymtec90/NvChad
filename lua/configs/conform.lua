@@ -3,6 +3,7 @@ local options = {
     lua = { "stylua" },
     css = { "prettier" },
     html = { "prettier" },
+    json = { "prettier" },
     python = { "ruff" },
     javascript = { "prettier" },
     typescript = { "prettier" },
